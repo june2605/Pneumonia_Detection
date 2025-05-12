@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chest X-Ray Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            margin: 30px auto;
+            width: 80%;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        input[type="file"], button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .results {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 50px;
+        }
+
+        .result-box {
+            background-color: #eaeaea;
+            padding: 20px;
+            border-radius: 12px;
+            width: 300px;
+        }
+
+        .status-box {
+            background-color: #4d4dfd;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .legend {
+            margin-top: 30px;
+        }
+
+        .label {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .normal { background-color: #a99dfb; }
+        .pneumonia { background-color: #f5b660; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Chest X-Ray Detection</h2>
+        <p>Detecting: Normal or Pneumonia</p>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Upload Image</button>
+        </form>
+
+        {% if label %}
+        <div class="results">
+            <div>
+                <h3>Camera Capture</h3>
+                <img src="{{ url_for('static', filename=image) }}" width="200">
+            </div>
+            <div class="result-box">
+                <h3>RESULTS</h3>
+                <img src="{{ url_for('static', filename=image) }}" width="150">
+                <div class="status-box">
+                    <p>Predicted Status: <strong>{{ label }}</strong></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
